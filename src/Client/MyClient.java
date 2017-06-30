@@ -36,21 +36,23 @@ public class MyClient {
 	private String IP_AS = "192.168.49.233";
 	private String IP_TGS = "192.168.49.48";
 	private String IP_V = "192.168.49.93";
+	private String IP_V_1 = "192.168.49.233";
 	private int PORT_AS = 45678;
 	private int PORT_TGS = 45679;
 	private int PORT_V = 45680;
+	private int PORT_V_1 = 33456;
 
 	private String Ticket_TGS = ""; // 从AS获得的票据
 	private String Ticket_V = ""; // 从TGS获得的票据
 
 	private String Key_C_TGS = ""; // Client与TGS之间的密钥
-	private String KEY_C_V = ""; // Client与V之间的密钥
+	public String KEY_C_V = ""; // Client与V之间的密钥
 
 	private String ID = null;
 	private String ID_T = "T001";
 	private String ID_V = null;
 
-	private static String Keys_C = "00000000";
+	private static String Keys_C = "00000004";
 
 	MyClient(JFrame frame,String ID, String ID_V){
 		this.frame = frame;
@@ -235,13 +237,12 @@ public class MyClient {
 	/**
 	 * 与服务器V相连
 	 */
-	public void conV() {
+	public void conV(String ip,int port) {
 		try {
 			socket1 = null;
 			String message = null;
-			System.out.println(IP_V + " " + PORT_V);
-			socket1 = new Socket(IP_V, PORT_V);
-			
+			System.out.println(ip + " " + port);
+			socket1 = new Socket(ip, port);
 			if (socket1 != null) {
 				message = getMessage("V");
 				br = new BufferedReader(new InputStreamReader(socket1.getInputStream(), "utf-8"));
@@ -303,7 +304,7 @@ public class MyClient {
 			return;
 		}
 		
-		my.conV();
+		my.conV(IP_V,PORT_V);
 		if (Other != null) {
 			JOptionPane.showMessageDialog(frame, Other, "错误",  
                     JOptionPane.ERROR_MESSAGE);
@@ -311,9 +312,46 @@ public class MyClient {
 
 			return;
 		}
-		frame.dispose();
+		//frame.dispose();
 		Client c = new Client(socket1,ID,ID_V);
 
+	}
+	
+	public void newSV2(MyClient my) throws IOException {
+
+		my.ATS("AS");
+		if (Other != null) {
+			System.out.println(Other);
+			JOptionPane.showMessageDialog(frame, Other, "错误",  
+                    JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		Other = null;
+
+		my.ATS("TGS");
+		if(Other != null){
+			System.out.println(Other);
+			JOptionPane.showMessageDialog(frame, Other, "错误",  
+                    JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		my.conV(IP_V_1,PORT_V_1);
+		if (Other != null) {
+			JOptionPane.showMessageDialog(frame, Other, "错误",  
+                    JOptionPane.ERROR_MESSAGE);
+			System.out.println(Other);
+
+			return;
+		}
+		//frame.dispose();
+		//socket1.close();
+		TS_6=tool.MoveSpace(TS_6);
+		
+		if(Integer.valueOf(TS_6)-Integer.valueOf(TS_5)==1){
+		Client_Docu_UI c = new Client_Docu_UI(socket1,KEY_C_V);
+		//c.diaoyong();
+		}
 	}
 }
 

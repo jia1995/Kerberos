@@ -90,4 +90,14 @@ public class Tool {
 		}
         return b;
     }
+	
+ 	public String MoveSpace(String name) {
+		int num=name.length();
+		if(num>0)
+		while(name.substring(num-1, num).equals(" ")){
+			name=name.substring(0, num-1);
+			num--;
+		}
+		return name;
+	}
 }
