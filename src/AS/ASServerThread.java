@@ -8,7 +8,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,7 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import Tools.*;
 
-public class ServerThread implements Runnable{
+public class ASServerThread implements Runnable{
 	public Tool tool=new Tool();
 		String ID_C = "";
 		String ID_TGS = "";
@@ -33,11 +32,11 @@ public class ServerThread implements Runnable{
 		Socket s = null;
 		//该线程处理的Socket对应的输入流
 		BufferedReader br = null;
-		Demo d = null;
+		ASSurface d = null;
 		Connection c = null;
 		//监听端口，将接收的线程保存在链表中
 		//负责处理每个线程通信的线程类
-		public ServerThread(Socket s,Demo d,Connection c) throws IOException{
+		public ASServerThread(Socket s,ASSurface d,Connection c) throws IOException{
 				this.s = s;
 				this.d = d;
 				this.c = c;
@@ -51,6 +50,7 @@ public class ServerThread implements Runnable{
 			String content = null;			
 			while((content = readFromClient()) != null){
 				//System.out.println(content);
+				
 				d.demo(content);
 
 				try {
@@ -79,7 +79,9 @@ public class ServerThread implements Runnable{
 							s.close();
 						}
 						if((judge_ID_TGS(c)==1)&&judge_ID_C(c)==1){	
+							System.out.println(ID_C+"->AS:"+content);
 							out.println(creat_package());
+							
 							d.demo("收到"+ID_C+"向"+ID_TGS+"发送的请求消息，时间戳为"+TS_1);
 							d.demo("返回的票据时间为"+TS_2);
 							d.demo("发送成功！");
@@ -106,7 +108,7 @@ public class ServerThread implements Runnable{
 				return br.readLine();
 			}
 			catch(IOException e){
-				MyAS.socketlist.remove(s);
+				ASServer.socketlist.remove(s);
 			}
 			return null;
 		}

@@ -24,7 +24,7 @@ import javax.swing.*;
 import Protocol.*;
 import Tools.*;
 
-public class Client_Docu_UI extends JFrame{
+public class ClientShare extends JFrame{
 	//static FileTransferClient client;
 	Tool tool=new Tool();
 	Protocol pro=new Protocol();
@@ -52,7 +52,7 @@ public class Client_Docu_UI extends JFrame{
 	
 	Socket s;
 	
-	public Client_Docu_UI(Socket s,String K){
+	public ClientShare(Socket s,String K){
 		this.s = s;
 		f = this;
 		this.KEY_C_V = K;

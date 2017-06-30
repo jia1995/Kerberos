@@ -1,19 +1,15 @@
 package TGS;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class Demo extends JFrame{
+public class TGSSurface extends JFrame{
 		Container co;
 		JButton Clear_button = new JButton("清空");      
 		JTextArea Content_text = new JTextArea(); 
@@ -23,12 +19,10 @@ public class Demo extends JFrame{
 	    public void demo(String str){
 	    	
 	    	char[] time = getTime().toCharArray();
-	    	//for(int i=0;i<=20;i++)
+
 	        Content_text.append(time[1]+"月"+time[2]+time[3]+"日"+time[4]+time[5]+"时"+time[6]+time[7]+"分"+time[8]+time[9]+"秒"+" : "+str+"\r\n"); 
-	        
-	    	
 	    }
-	    public Demo(){
+	    public TGSSurface(){
 	    	co=this.getContentPane();
 	    	co.setLayout(null); 
 	    	
@@ -37,9 +31,7 @@ public class Demo extends JFrame{
 	        this.setSize(600, 500);  //窗口大小
 	        
 	        Content_text.setFont(new Font("Serif", Font.PLAIN, 16));
-	       //Content_text.setSelectionColor(Color.green);
-	        //Content_text.setBounds(40, 40, 500, 340);
-	        
+
 	        Clear_button.setBounds(220, 400, 130, 40);
 	        Clear_button.setFont(new Font("Serif", Font.PLAIN, 25));
 	        
@@ -68,8 +60,6 @@ public class Demo extends JFrame{
 	        
 	        this.setVisible(true); 
 	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        
-	        
 	    }
 	    
 	    public static String getTime(){
@@ -99,7 +89,7 @@ public class Demo extends JFrame{
 		}
 	    
 	    public static void main(String args[]){	
-	    	Demo d = new Demo();
+	    	TGSSurface d = new TGSSurface();
 	    	d.demo("21342rf3");
 	    }  
 }

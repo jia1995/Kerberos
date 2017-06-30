@@ -15,7 +15,7 @@ import javax.swing.border.TitledBorder;
 import Tools.*;
 
   
-public class Server {  
+public class ServerChat {  
 	
     private JFrame frame;  
     private JTextArea contentArea;  
@@ -41,7 +41,7 @@ public class Server {
 
     // 主方法,程序执行入口  
     public static void main(String[] args) {  
-        new Server();  
+        new ServerChat();  
     }  
   
     // 执行消息发送  
@@ -68,7 +68,7 @@ public class Server {
     }  
   
     // 构造放法  
-    public Server() {  
+    public ServerChat() {  
         frame = new JFrame("服务器");  
         // 更改JFrame的图标：  
         //frame.setIconImage(Toolkit.getDefaultToolkit().createImage(Client.class.getResource("qq.png")));  
@@ -275,7 +275,7 @@ public class Server {
                     //BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"));
                     PrintWriter out=null;
                     String str = r.readLine();
-                    VThread v = new VThread(contentArea);
+                    ServerChatVerify v = new ServerChatVerify(contentArea);
                     v.PullPack(str);
             		String Dec_Ticket_TGS=v.Decrypt_Ticket_V();
             		System.out.println(Dec_Ticket_TGS);

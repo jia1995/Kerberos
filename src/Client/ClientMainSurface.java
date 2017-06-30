@@ -6,21 +6,19 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class client_connect_UI extends JFrame{
+public class ClientMainSurface extends JFrame{
 	private JLabel label1;
 	private JFrame frame;
 	private JTextField text1;
 	private JButton button2;
 	private JButton button3;
-	//private JButton button4;
-	private String ID_C = "C004";
-	//public String kcv="";
+	private String ID_C = "C003";
 	private JLabel label2;
 	private Container label3;
 	
 	
 	
-	public client_connect_UI() {
+	public ClientMainSurface() {
 		frame = this;
 		frame.setTitle("客户机认证");
 		frame.setLocation(400, 150);
@@ -53,7 +51,7 @@ public class client_connect_UI extends JFrame{
 		
 		button2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				MyClient my = new MyClient(frame,ID_C,"V001");
+				ClientVerify my = new ClientVerify(frame,ID_C,"V001");
 				my.newS(my);
 			}
 		});
@@ -64,7 +62,7 @@ public class client_connect_UI extends JFrame{
 		
 		button3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				MyClient my = new MyClient(frame,ID_C,"V002");
+				ClientVerify my = new ClientVerify(frame,ID_C,"V002");
 				try {
 					my.newSV2(my);
 				} catch (IOException e) {
@@ -100,7 +98,7 @@ public class client_connect_UI extends JFrame{
 
 	
 	public static void main(String[] args) {
-		new client_connect_UI();
+		new ClientMainSurface();
 	}
 
 }

@@ -1,4 +1,4 @@
-package Server;
+package FileServer;
 
 
 import java.io.BufferedReader;
@@ -7,10 +7,11 @@ import java.net.Socket;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import javax.swing.JTextArea;
+
 import Protocol.Protocol;
 import Tools.Des;
 import Tools.Tool;
-public class VThread{
+public class ServerShareVerify{
 	
 	//全局变量
 	public Protocol pro = new Protocol();
@@ -23,7 +24,7 @@ public class VThread{
 	public String Authenticator_C = "";//you
 	public String Ticket_V = "";//you
 	public String KEY_C_V = "";//you
-	public String KEY_V = "00000101";//you
+	public String KEY_V = "00000102";//you
 	public String ID_C = "";//you
 	public String AD_C = "";//you
 	public String TS_3 = "";//you
@@ -38,11 +39,7 @@ public class VThread{
 	BufferedWriter bw = null;
 	//监听端口，将接收的线程保存在链表中
 	//负责处理每个线程通信的线程类
-	JTextArea text = null;
-	
-	public VThread(JTextArea text){//构造函数
-		this.text = text;
-	}
+
 
 	public void PullPack(String message){//拆包
 		LinkedHashMap<String, Integer> map = pro.Unpack(message);
@@ -51,17 +48,17 @@ public class VThread{
 		for(Entry<String, Integer> entry : map.entrySet()){
 			if(entry.getKey() == "Prelude"){
 				Prelude = message.substring(0, entry.getValue());
-				//System.out.println("Prelude  "+Prelude);
+				System.out.println("Prelude  "+Prelude);
 				message = message.substring(entry.getValue());
 			}
 			if(entry.getKey() == "Ticket_V"){
 				Ticket_V = message.substring(0, entry.getValue());
-				//System.out.println("Ticket_V  "+Ticket_V);
+				System.out.println("Ticket_V  "+Ticket_V);
 				message = message.substring(entry.getValue());
 			}
 			if(entry.getKey() == "Authenticator_C"){
 				Authenticator_C = message;
-				//System.out.println("Authenticator_C  "+Authenticator_C);
+				System.out.println("Authenticator_C  "+Authenticator_C);
 			}
 		}
 	}
@@ -72,12 +69,12 @@ public class VThread{
 		for(Entry<String, Integer> entry : map.entrySet()){
 			if(entry.getKey() == "KEY_C_V"){
 				KEY_C_V = message.substring(0, entry.getValue());
-				//System.out.println("KEY_C_V"+KEY_C_V);
+				System.out.println("KEY_C_V"+KEY_C_V);
 				message = message.substring(entry.getValue());
 			}
 			if(entry.getKey() == "ID_C"){
 				ID_C_1 = message.substring(0, entry.getValue());
-				//System.out.println("ID_C_1"+ID_C_1);
+			//	System.out.println("ID_C_1"+ID_C_1);
 				message = message.substring(entry.getValue());
 			}
 			if(entry.getKey() == "AD_C"){
@@ -102,13 +99,13 @@ public class VThread{
 		}
 		Analyse_Authenticator_C();
 		if(Verify()){
-			//System.out.println("TS_5:   "+TS_5);
+			System.out.println("TS_5:   "+TS_5);
 			int num = Integer.parseInt(TS_5)+1;
 			String ReturnMessage="0"+num;
-			//System.out.println("加密前Message  "+ReturnMessage);
+			System.out.println("加密前Message  "+ReturnMessage);
 			Des des=new Des();
 			Message=des.Encrypt(ReturnMessage, KEY_C_V);
-			//System.out.println("加密后Message  "+Message);
+			System.out.println("加密后Message  "+Message);
 			Message="1100000000"+Message;
 		}
 		else{
@@ -128,7 +125,7 @@ public class VThread{
 		for(Entry<String, Integer> entry : map.entrySet()){
 			if(entry.getKey() == "ID_C"){
 				ID_C = message.substring(0, entry.getValue());
-				//System.out.println("ID_C"+ID_C);
+				System.out.println("ID_C"+ID_C);
 				message = message.substring(entry.getValue());
 			}
 			if(entry.getKey() == "AD_C"){
@@ -159,11 +156,13 @@ public class VThread{
 				}
 			}
 			else{
+				ERROR="Server Verify ADc failed!";
 				System.out.println("ADc不同验证失败！");
 				return false;
 			}
 		}
 		else{
+			ERROR="Server Verify Client ID failed!";
 			System.out.println("Client ID 不同验证失败！");
 			return false;
 		}
@@ -172,7 +171,7 @@ public class VThread{
 	public String Decrypt_Ticket_V(){//分析Ticket_V
 		Des des=new Des();
 		String temp=des.Decrypt(Ticket_V, KEY_V);
-	//	System.out.println("TICKET_v解密"+Ticket_V+"  "+KEY_V);
+		System.out.println("TICKET_v解密"+Ticket_V+"  "+KEY_V);
 		return temp;
 	}
 	

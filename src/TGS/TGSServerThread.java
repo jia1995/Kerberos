@@ -1,29 +1,14 @@
 package TGS;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
+import java.io.*;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-
-import Tools.Des;
-
 import Protocol.Protocol;
-import TGS.Demo;
 import Tools.*;
 
-public class TGSThread implements Runnable{
+public class TGSServerThread implements Runnable{
 	
 	//全局变量
 	public Tool tool=new Tool();
@@ -54,12 +39,12 @@ public class TGSThread implements Runnable{
 	//某线程处理的Socket对应的输入流
 	BufferedReader br = null;
 	BufferedWriter bw = null;
-	Demo d = null;
+	TGSSurface d = null;
 	Connection conn = null;
 	
 	//监听端口，将接收的线程保存在链表中
 	//负责处理每个线程通信的线程类
-	public TGSThread(Socket s,Demo d,Connection conn) throws IOException{
+	public TGSServerThread(Socket s,TGSSurface d,Connection conn) throws IOException{
 			this.s = s;
 			this.d = d;
 			this.conn = conn;

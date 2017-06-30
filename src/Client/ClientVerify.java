@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import Protocol.Protocol;
 import Tools.*;
 
-public class MyClient {
+public class ClientVerify {
 
 	public Tool tool=new Tool();
 	public Protocol pro=new Protocol();
@@ -52,9 +52,9 @@ public class MyClient {
 	private String ID_T = "T001";
 	private String ID_V = null;
 
-	private static String Keys_C = "00000004";
+	private static String Keys_C = "00000003";
 
-	MyClient(JFrame frame,String ID, String ID_V){
+	ClientVerify(JFrame frame,String ID, String ID_V){
 		this.frame = frame;
 		this.ID = ID;
 		this.ID_V = ID_V;
@@ -285,7 +285,7 @@ public class MyClient {
 		}
 	}
 
-	public void newS(MyClient my) {
+	public void newS(ClientVerify my) {
 
 		my.ATS("AS");
 		if (Other != null) {
@@ -313,11 +313,15 @@ public class MyClient {
 			return;
 		}
 		//frame.dispose();
-		Client c = new Client(socket1,ID,ID_V);
+		TS_6=tool.MoveSpace(TS_6);
+		
+		if(Integer.valueOf(TS_6)-Integer.valueOf(TS_5)==1){
+			ClientChat c = new ClientChat(socket1,ID,ID_V);
+		}
 
 	}
 	
-	public void newSV2(MyClient my) throws IOException {
+	public void newSV2(ClientVerify my) throws IOException {
 
 		my.ATS("AS");
 		if (Other != null) {
@@ -344,13 +348,10 @@ public class MyClient {
 
 			return;
 		}
-		//frame.dispose();
-		//socket1.close();
 		TS_6=tool.MoveSpace(TS_6);
 		
 		if(Integer.valueOf(TS_6)-Integer.valueOf(TS_5)==1){
-		Client_Docu_UI c = new Client_Docu_UI(socket1,KEY_C_V);
-		//c.diaoyong();
+			ClientShare c = new ClientShare(socket1,KEY_C_V);
 		}
 	}
 }

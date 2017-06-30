@@ -10,13 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import AS.ServerThread;
-
 /*  实现AS端的多线程通信
  * 
  * 陈培璐
  */
-	public class MyAS{
+	public class ASServer{
 		public static List<Object> socketlist = Collections.synchronizedList(new ArrayList<>());
 		
 		public static Connection DB_connect() throws ClassNotFoundException, SQLException{
@@ -42,7 +40,7 @@ import AS.ServerThread;
 		
 		public static void main(String[] args) 
 				throws IOException, ClassNotFoundException, SQLException{  
-					Demo d = new Demo();
+				ASSurface d = new ASSurface();
 					Connection c = DB_connect();
 					if(c==null){
 						System.out.println("SQLERROR");
@@ -53,7 +51,7 @@ import AS.ServerThread;
 				while(true){
 					Socket s = ss.accept();
 					socketlist.add(s);					
-					new Thread(new ServerThread(s,d,c)).start();
+					new Thread(new ASServerThread(s,d,c)).start();
 				}		
 		}
 	}

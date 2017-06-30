@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
-public class Demo extends JFrame{
+public class ASSurface extends JFrame{
 		Container co;
 		JButton Clear_button = new JButton("清空");      
 		JTextArea Content_text = new JTextArea(); 
@@ -20,13 +20,10 @@ public class Demo extends JFrame{
 		JLabel label = new JLabel("AS消息列表");
         
 	    public void demo(String str){
-	    	
-	  //  	char[] time = getTime().toCharArray();
-	    	
 	        Content_text.append(str+"\r\n"); 
 	        	    	
 	    }
-	    public Demo(){
+	    public ASSurface(){
 	    	co=this.getContentPane();
 	    	co.setLayout(null); 
 	    	
@@ -58,14 +55,9 @@ public class Demo extends JFrame{
 					Content_text.setText(null);   //清空文本区
 				}
 			});  
-	        
-	        
 	        Content_text.setEditable(false);//不可编辑
-	        
 	        this.setVisible(true); 
 	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        
-	        
 	    }
 	    
 	    public static String getTime(){
@@ -95,7 +87,7 @@ public class Demo extends JFrame{
 		}
 	    
 	    public static void main(String args[]){	
-	    	Demo d = new Demo();
+	    	ASSurface d = new ASSurface();
 	    	//d.demo("21342rf3");
 
 	    }  

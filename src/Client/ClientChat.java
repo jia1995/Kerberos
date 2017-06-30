@@ -9,7 +9,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import Tools.*;
-public class Client{  
+public class ClientChat{  
   
     private JFrame frame;  
     private JList userList;  
@@ -54,7 +54,7 @@ public class Client{
     }  
   
     // 构造方法  
-    public Client(Socket socket, String ID_C,String ID_V) {  
+    public ClientChat(Socket socket, String ID_C,String ID_V) {  
     	this.socket = socket;
         textArea = new JTextArea();  
         textArea.setEditable(false);  
@@ -177,7 +177,7 @@ public class Client{
                 if (isConnected) {  
                     closeConnection();// 关闭连接  
                 }  
-                System.exit(0);// 退出程序  
+                //System.exit(0);// 退出程序  
             }  
         });  
     }  
