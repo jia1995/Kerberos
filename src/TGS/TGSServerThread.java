@@ -1,7 +1,7 @@
 package TGS;
 
 import java.io.*;
-import java.net.Socket;
+import java.net.*;
 import java.sql.*;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;

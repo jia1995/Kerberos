@@ -2,7 +2,7 @@ package Client;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
+import java.io.*;
 
 import javax.swing.*;
 

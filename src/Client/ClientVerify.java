@@ -2,14 +2,11 @@ package Client;
 
 
 import java.io.*;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import Protocol.Protocol;
 import Tools.*;

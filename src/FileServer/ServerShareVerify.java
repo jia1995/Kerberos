@@ -1,16 +1,13 @@
 package FileServer;
 
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-import javax.swing.JTextArea;
 
 import Protocol.Protocol;
-import Tools.Des;
-import Tools.Tool;
+import Tools.*;
 public class ServerShareVerify{
 	
 	//全局变量

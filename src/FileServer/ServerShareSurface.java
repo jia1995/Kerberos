@@ -1,12 +1,8 @@
 package FileServer;
 
-import java.awt.Container;
-import java.awt.Font;
+import java.awt.*;
 import java.io.File;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public class ServerShareSurface {
 

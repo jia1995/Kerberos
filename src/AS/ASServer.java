@@ -1,17 +1,11 @@
 package AS;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.net.*;
+import java.sql.*;
+import java.util.*;
 
 /*  实现AS端的多线程通信
- * 
  * 陈培璐
  */
 	public class ASServer{

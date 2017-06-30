@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.*;  
   
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.*;
 import Tools.*;
 public class ClientChat{  
   
